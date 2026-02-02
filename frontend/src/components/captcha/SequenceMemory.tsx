@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { captchaService } from '../../services/captcha';
 import { useBehaviorTracking } from '../../hooks/useBehaviorTracking';
 import { CaptchaChallenge, BehaviorMetrics } from '../../types/captcha';
+type SequenceStatus = 'loading' | 'displaying' | 'input' | 'verifying';
 
 interface SequenceMemoryProps {
   apiKey: string;
@@ -24,10 +25,11 @@ const SequenceMemory: React.FC<SequenceMemoryProps> = ({
   const [sequenceType, setSequenceType] = useState<string>('numeric');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [status, setStatus] = useState<'loading' | 'displaying' | 'input' | 'verifying'>('loading');
+  const [status, setStatus] = useState<SequenceStatus>('loading');
+
   
   const { startTracking, stopTracking, getMetrics } = useBehaviorTracking();
-  const displayTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const displayTimerRef = useRef<number | null>(null);
   const challengeStartTimeRef = useRef<number>(0);
 
   // Load challenge on mount
@@ -71,7 +73,7 @@ const SequenceMemory: React.FC<SequenceMemoryProps> = ({
       setShowSequence(true);
       
       // Hide sequence after display duration
-      displayTimerRef.current = setTimeout(() => {
+      displayTimerRef.current = windowsetTimeout(() => {
         setShowSequence(false);
         setStatus('input');
       }, duration);
