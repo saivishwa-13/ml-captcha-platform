@@ -1,0 +1,56 @@
+spring:
+  application:
+    name: ml-captcha-backend
+  
+  # Database configuration disabled for in-memory mode
+  # datasource:
+  #   url: jdbc:postgresql://localhost:5432/mlcaptcha
+  #   username: ${DB_USERNAME:mlcaptcha}
+  #   password: ${DB_PASSWORD:mlcaptcha123}
+  #   driver-class-name: org.postgresql.Driver
+  
+  # JPA disabled for in-memory mode
+  # jpa:
+  #   hibernate:
+  #     ddl-auto: validate
+  
+  # Flyway disabled for in-memory mode
+  # flyway:
+  #   enabled: false
+  
+  # Redis disabled for in-memory mode (optional)
+  # data:
+  #   redis:
+  #     host: ${REDIS_HOST:localhost}
+  #     port: ${REDIS_PORT:6379}
+  
+  # Cache disabled for in-memory mode
+  # cache:
+  #   type: simple
+
+server:
+  port: ${SERVER_PORT:8080}
+  error:
+    include-message: always
+    include-binding-errors: always
+
+jwt:
+  secret: ${JWT_SECRET:your-256-bit-secret-key-change-in-production-minimum-32-characters}
+  expiration: 900000 # 15 minutes
+
+ml-service:
+  url: ${ML_SERVICE_URL:http://localhost:8000}
+  timeout: 5000
+
+rate-limit:
+  per-client: 1000 # requests per hour
+  per-ip: 100 # requests per hour
+  window-size: 3600 # seconds
+
+logging:
+  level:
+    com.mlcaptcha: DEBUG
+    org.springframework.security: INFO
+    org.hibernate.SQL: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
