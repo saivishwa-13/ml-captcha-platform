@@ -1,7 +1,21 @@
 spring:
   application:
     name: ml-captcha-backend
-  
+  datasource:
+    url: jdbc:h2:mem:mlcaptcha
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: ""
+
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+
+  h2:
+    console:
+      enabled: true
   # Database configuration disabled for in-memory mode
   # datasource:
   #   url: jdbc:postgresql://localhost:5432/mlcaptcha
