@@ -2,8 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { captchaService } from '../../services/captcha';
 import { useBehaviorTracking } from '../../hooks/useBehaviorTracking';
 import { CaptchaChallenge, BehaviorMetrics } from '../../types/captcha';
-type SequenceStatus = 'loading' | 'displaying' | 'input' | 'verifying';
 
+type SequenceStatus = 'loading' | 'displaying' | 'input' | 'verifying';
 interface SequenceMemoryProps {
   apiKey: string;
   difficultyLevel?: number;
@@ -73,7 +73,7 @@ const SequenceMemory: React.FC<SequenceMemoryProps> = ({
       setShowSequence(true);
       
       // Hide sequence after display duration
-      displayTimerRef.current = windowsetTimeout(() => {
+      displayTimerRef.current = window.setTimeout(() => {
         setShowSequence(false);
         setStatus('input');
       }, duration);
