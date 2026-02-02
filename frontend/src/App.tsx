@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import CaptchaWidget from './components/captcha/CaptchaWidget';
 import './App.css';
 
