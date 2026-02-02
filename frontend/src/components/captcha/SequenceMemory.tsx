@@ -301,7 +301,7 @@ const SequenceMemory: React.FC<SequenceMemoryProps> = ({
               disabled={userInput.length !== sequence.length || loading}
               className="action-button primary"
             >
-              {status === 'verifying' ? 'Verifying...' : 'Submit'}
+              {loading ? 'Verifying...' : 'Submit'}
             </button>
           </div>
         </div>
